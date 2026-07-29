@@ -1,8 +1,23 @@
-import { useState } from 'react'
-import './App.css'
+import {useEffect, useState } from "react";
+import inspectUser from '../pages/InspectUser';
+import api from './api/api';
+import { getAccessToken,setAccessToken } from "./tokenStore";
 
-function App() {
+function App(){
+  useEffect(() => {
+      api.get('api/auth/refresh', { withCredentials: true })
+          .then(res => setAccessToken(res.data.accessToken))
+          .catch(() => setAccessToken(null));  // no valid refresh cookie = not logged in
+  }, []);
 
+  return(
+    <div>
+      <Navbar />
+      <Routes>
+        <Route path ="/inspect-page" element = {<inspectUser/>}/>
+      </Routes>  
+    </div>
+  );
 }
 
-export default App
+export default App;

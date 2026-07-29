@@ -3,12 +3,14 @@ require('dotenv').config();
 const cors = require('cors');
 const authRoute = require('./routes/auth');
 const {verifyConnection} = require('./DB/neo4j');
+const connectionRoute = require('./routes/connectionRoutes');
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
 app.use('/api/auth', authRoute);
+app.use('/api/connections', connectionRoute);
 
 const PORT = process.env.PORT;
 verifyConnection()
