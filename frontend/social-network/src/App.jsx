@@ -1,7 +1,7 @@
 import {useEffect, useState } from "react";
 import inspectUser from '../pages/InspectUser';
 import api from './api/api';
-import { getAccessToken,setAccessToken } from "./tokenStore";
+import { getAccessToken,setAccessToken } from "../tokenStore";
 
 function App(){
   useEffect(() => {
@@ -14,7 +14,7 @@ function App(){
     <div>
       <Navbar />
       <Routes>
-        <Route path ="/inspect-page" element = {<inspectUser/>}/>
+        <Route path ="/inspect-page/:id" element = {<inspectUser/>}/>
       </Routes>  
     </div>
   );
